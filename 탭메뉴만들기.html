@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu>li.on {
+            color: red;
+        }
+
+        .con>li {
+            display: none;
+        }
+
+        .con>li.on {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="menu">
+        <li class="on">menu01</li>
+        <li>menu02</li>
+        <li>menu03</li>
+    </ul>
+    <ul class="con">
+        <li class="on">con01</li>
+        <li>con02</li>
+        <li>con03</li>
+    </ul>
+
+    <script>
+        //강사가 번호만 나오면 뭐든 지 만들수 있다고 했다.
+        // $(this).index() 제이쿼리에 있는 인덱스를 가져오는 방법
+
+        const UL = document.querySelector('.menu');
+        const MENU = document.querySelectorAll('.menu>li');
+        const CON = document.querySelectorAll('.con>li');
+        console.log(MENU, UL.children, ...UL.children, [...UL.children]);
+
+        //MENU 의 li를 클릭했을때 번호를 가져오기
+        // const 번호가져오기 = (e) => {
+        //     const 번호 = [...MENU].indexOf(e.target);
+        //     for (let i = 0; i < CON.length; i++) {
+        //         CON[i].classList.remove('on');
+        //     }
+        //     CON[번호].classList.add('on')
+
+        // }
+        // for (let i = 0; i < MENU.length; i++) {
+        //     MENU[i].addEventListener('click', 번호가져오기);
+        //     console.log('번호 :', this, CON[0]);
+        // }
+
+
+
+        // forEach 라는 메소드는 버노를 아주 쉽게 반환한다.
+
+        MENU.forEach((it, idx) => {
+            it.addEventListener('click', () => {
+                MENU.forEach(it => it.classList.remove('on'));
+                it.classList.add('on');
+                CON.forEach(it => it.classList.remove('on'));
+                CON[idx].classList.add('on');
+            });
+        });
+
+        $('.menu>li').on('click', function () {
+            var idx = $(this).index()
+            $(this).addClass('on').siblings().removeClass('on');
+            $('.con>li').eq(idx).addClass('on').siblings().removeClass('on');
+        })
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
